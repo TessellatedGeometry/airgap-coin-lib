@@ -9,7 +9,7 @@ export interface CosmosMessageJSON {
   type: CosmosMessageTypeIndex
   amount: CosmosCoinJSON[]
   fromAddress: string
-  toAddress: string
+  toAddress: string[]
 }
 
 export enum CosmosMessageTypeIndex {

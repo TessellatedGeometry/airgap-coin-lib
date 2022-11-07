@@ -21,7 +21,7 @@ interface CosmosMessage {
   type: CosmosMessageTypeIndex
   amount: CosmosCoin[]
   fromAddress: string
-  toAddress: string
+  toAddress: string[]
 }
 
 interface CosmosTransaction {

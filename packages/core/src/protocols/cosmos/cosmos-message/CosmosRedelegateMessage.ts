@@ -1,5 +1,5 @@
 import { EncodeObject } from '../../../dependencies/src/cosmjs'
-import { AirGapTransactionType, IAirGapTransaction } from '../../../interfaces/IAirGapTransaction'
+import { IAirGapTransaction } from '../../../interfaces/IAirGapTransaction'
 import { CosmosCoin } from '../CosmosCoin'
 import { CosmosProtocol } from '../CosmosProtocol'
 
@@ -42,19 +42,17 @@ export class CosmosRedelegateMessage implements CosmosMessage {
     )
   }
 
-  // TODO: Figure out how this works
   public toJSON(): CosmosMessageJSON {
     return {
       type: this.type.index,
       amount: [this.amount.toJSON()],
       fromAddress: this.delegatorAddress,
-      toAddress: this.validatorAddress
+      toAddress: [this.validatorSrcAddress, this.validatorDestAddress]
     }
   }
 
-  // TODO figure out how to do this
   public static fromJSON(json: CosmosMessageJSON): CosmosRedelegateMessage {
-    return new CosmosRedelegateMessage(json.fromAddress, json.toAddress, json.toAddress, CosmosCoin.fromJSON(json.amount[0]))
+    return new CosmosRedelegateMessage(json.fromAddress, json.toAddress[0], json.toAddress[1], CosmosCoin.fromJSON(json.amount[0]))
   }
 
   public toRPCBody(): any {
@@ -73,7 +71,6 @@ export class CosmosRedelegateMessage implements CosmosMessage {
     return {
       amount: this.amount.amount,
       from: [this.delegatorAddress],
-      // TODO: Not clear what these are used for.
       to: [this.validatorSrcAddress, this.validatorDestAddress],
       isInbound: false,
       fee,

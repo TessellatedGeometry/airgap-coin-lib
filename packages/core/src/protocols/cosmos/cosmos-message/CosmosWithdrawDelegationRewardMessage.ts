@@ -46,12 +46,12 @@ export class CosmosWithdrawDelegationRewardMessage implements CosmosMessage {
       type: this.type.index,
       amount: [{ denom: '', amount: '' }],
       fromAddress: this.delegatorAddress,
-      toAddress: this.validatorAddress
+      toAddress: [this.validatorAddress]
     }
   }
 
   public static fromJSON(json: CosmosMessageJSON): CosmosWithdrawDelegationRewardMessage {
-    return new CosmosWithdrawDelegationRewardMessage(json.fromAddress, json.toAddress)
+    return new CosmosWithdrawDelegationRewardMessage(json.fromAddress, json.toAddress[0])
   }
 
   public toRPCBody() {
