@@ -102,6 +102,8 @@ export class CosmosTransaction implements JSONConvertible, RPCConvertible, Encod
           return CosmosDelegateMessage.fromJSON(value)
         case CosmosMessageType.WithdrawDelegationReward.index:
           return CosmosWithdrawDelegationRewardMessage.fromJSON(value)
+        case CosmosMessageType.Redelegate.index:
+          return CosmosDelegateMessage.fromJSON(value)
         default:
           throw new InvalidValueError(Domain.COSMOS, 'Unknown message')
       }

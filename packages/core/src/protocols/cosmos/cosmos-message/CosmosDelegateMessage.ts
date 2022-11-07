@@ -45,14 +45,14 @@ export class CosmosDelegateMessage implements CosmosMessage {
       type: this.type.index,
       amount: [this.amount.toJSON()],
       fromAddress: this.delegatorAddress,
-      toAddress: this.validatorAddress
+      toAddress: [this.validatorAddress]
     }
   }
 
   public static fromJSON(json: CosmosMessageJSON): CosmosDelegateMessage {
     return new CosmosDelegateMessage(
       json.fromAddress,
-      json.toAddress,
+      json.toAddress[0],
       CosmosCoin.fromJSON(json.amount[0]),
       json.type === CosmosMessageType.Undelegate.index
     )

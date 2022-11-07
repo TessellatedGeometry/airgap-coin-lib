@@ -43,14 +43,14 @@ export class CosmosSendMessage implements CosmosMessage {
       type: this.type.index,
       amount: this.amount.map((value: CosmosCoin) => value.toJSON()),
       fromAddress: this.fromAddress,
-      toAddress: this.toAddress
+      toAddress: [this.toAddress]
     }
   }
 
   public static fromJSON(json: CosmosMessageJSON): CosmosSendMessage {
     return new CosmosSendMessage(
       json.fromAddress,
-      json.toAddress,
+      json.toAddress[0],
       json.amount.map((value: CosmosCoinJSON) => CosmosCoin.fromJSON(value))
     )
   }
